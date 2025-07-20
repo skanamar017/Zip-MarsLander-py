@@ -14,6 +14,6 @@ class BurnDataStream:
             self.burn_idx += 1
             print(self.burn_array[self.burn_idx])  # hack!
             return self.burn_array[self.burn_idx]
-        print(f"burn: {burn:.0f}")  # hack!
+        print(f"burn: {self.burn_array[self.burn_idx]:.0f}")  # hack!
 
         return 0

@@ -40,9 +40,9 @@ class Simulation:
         s += "Altitude\t\t"
         s += "Burn\n"
         s += "----\t"
-        s += "-----\t"
+        s += "--------\t"
         s += "----\t"
-        s += "------\t"
+        s += "--------\t\t"
         s += "----\n"
         return s
 
@@ -54,7 +54,7 @@ class Simulation:
 
     # main game loop
     def run_simulation(self, burn_source):
-        status = None
+        status = DescentEvent(0, self.vehicle.velocity, self.vehicle.fuel, self.vehicle.altitude, self.vehicle.flying)
         burn_interval = 0
         self.print_string(self.game_header())
         self.print_string(self.get_header())
@@ -71,15 +71,17 @@ class Simulation:
                 self.print_string(self.get_header())
         fs = self.vehicle.check_final_status()
         self.print_string("Final Status: "+fs)
-        if status is not None:
-            return status.get_status()
-        return -1
+        #if status is not None:
+        #    return status.get_status()
+        #return -1
+        return self.vehicle.flying
 
     @staticmethod
     def main():
         # create a new BurnInputStream
         #burnSource = BurnInputStream()
-        burnSource = OnBoardComputer()
+        #burnSource = OnBoardComputer()
+        burnSource=BurnDataStream()
         # create a new Simulation object with a random starting altitude
         game = Simulation(Vehicle(Simulation.random_altitude()))
         # pass the new BurnInputStream to the run_simulation method
